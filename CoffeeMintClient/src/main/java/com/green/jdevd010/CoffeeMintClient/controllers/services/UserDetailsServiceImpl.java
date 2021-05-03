@@ -8,6 +8,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import com.green.jdevd010.CoffeeMintClient.daos.UserRepository;
 import com.green.jdevd010.CoffeeMintClient.helpers.AppString;
 import com.green.jdevd010.CoffeeMintClient.models.User;
+import com.green.jdevd010.CoffeeMintClient.security.MyUserDetails;
 
 public class UserDetailsServiceImpl implements UserDetailsService {
 
@@ -20,13 +21,12 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 		
 		User user = userRepository.getUserByUsername(username);
 		
+		System.out.println("loadUserByUsername ** : " + username);
+		
 		if (user == null) {
+			System.out.println("loadUserByUsername with not found username");
 			throw new UsernameNotFoundException(AppString.usernameNotFound);
-		}
-		
-		
-		return null;
+		}	
+		return new MyUserDetails(user);
 	}
-
-
 }

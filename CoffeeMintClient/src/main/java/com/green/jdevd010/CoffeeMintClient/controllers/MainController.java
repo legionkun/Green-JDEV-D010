@@ -6,9 +6,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class MainController {
 
-	@GetMapping("/login")
-	public String showLoginView() {
+//	@GetMapping("/login")
+//	public String showLoginView() {
+//		
+//		return "login";
+//	}
+	
+	@GetMapping("/product")
+	public String showProductView() {
 		
-		return "login";
+		return "product";
 	}
 }
