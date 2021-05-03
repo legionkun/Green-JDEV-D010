@@ -8,6 +8,6 @@ import com.green.jdevd010.CoffeeMintClient.models.User;
 
 public interface UserRepository  extends CrudRepository<User, Integer>{
 
-	@Query("SELECT u FROM User WHERE u.username = :username")
+	@Query("SELECT u FROM User u WHERE u.username = :username")
 	public User getUserByUsername(@Param("username") String username);
 }
