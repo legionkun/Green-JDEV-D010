@@ -8,6 +8,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import com.green.jdevd010.CoffeeMintClient.models.Role;
 import com.green.jdevd010.CoffeeMintClient.models.User;
 
 public class MyUserDetails implements UserDetails {
@@ -21,14 +22,17 @@ public class MyUserDetails implements UserDetails {
 	
 	public MyUserDetails(User user) {
 		this.user = user;
+		
 	}
 	
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		List<SimpleGrantedAuthority> authorities = new ArrayList<>();
 		
-		authorities.add(new SimpleGrantedAuthority("EDITOR"));
-		
+		//authorities.add(new SimpleGrantedAuthority("EDITOR"));
+		for(Role role : user.getRoles()) {
+			authorities.add(new SimpleGrantedAuthority(role.getName()));
+		}
 		return authorities;
 	}
 

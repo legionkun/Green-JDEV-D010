@@ -44,10 +44,4 @@ public class MainController {
 			return "redirect:/login";
 		}
 	}
-	
-	@GetMapping("/product")
-	public String showProductView() {
-		
-		return "product";
-	}
 }
