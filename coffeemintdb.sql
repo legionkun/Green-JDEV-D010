@@ -25,3 +25,16 @@ CREATE TABLE `coffeemintdb-jdevd010`.`users_roles` (
     REFERENCES `coffeemintdb-jdevd010`.`roles` (`role_id`)
     ON DELETE CASCADE
     ON UPDATE CASCADE);
+
+CREATE TABLE `coffeemintdb-jdevd010`.`customers` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `email` VARCHAR(45) NOT NULL,
+  `password` VARCHAR(128) NOT NULL,
+  `first_name` VARCHAR(45) NOT NULL,
+  `last_name` VARCHAR(45) NOT NULL,
+  `phone_number` VARCHAR(12) NULL,
+  `address` VARCHAR(128) NULL,
+  `enabled` TINYINT NULL DEFAULT 1,
+  `auth_provider` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE INDEX `email_UNIQUE` (`email` ASC) VISIBLE);

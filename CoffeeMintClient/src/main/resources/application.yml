@@ -1,0 +1,24 @@
+spring:
+  datasource:
+    password: 123456
+    url: jdbc:mysql://localhost:3306/coffeemintdb-jdevd010
+    username: approot
+  jpa:
+    hibernate:
+      ddl-auto: none
+  security:
+    oauth2:
+      client:
+        registration:
+          facebook:
+            client-id: 2842490549394366
+            client-secret: db9fc48bc335d7a8242aade42cea2789
+            scope:
+            - email
+            - public_profile
+          google:
+            client-id: 755182767816-9l6gdnh2j1lhivj7mqu784g6cjutm1rc.apps.googleusercontent.com
+            client-secret:  2vRVq-7MnaLlPr_DKnrzYNws
+            scope:
+            - email
+            - profile
