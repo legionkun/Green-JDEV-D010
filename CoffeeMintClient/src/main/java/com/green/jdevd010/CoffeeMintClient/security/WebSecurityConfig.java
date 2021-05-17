@@ -1,5 +1,6 @@
 package com.green.jdevd010.CoffeeMintClient.security;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -14,12 +15,19 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import com.green.jdevd010.CoffeeMintClient.controllers.services.UserDetailsServiceImpl;
 import com.green.jdevd010.CoffeeMintClient.handlers.OnAuthenticationFailureHandler;
 import com.green.jdevd010.CoffeeMintClient.handlers.OnAuthenticationSuccessHandler;
+import com.green.jdevd010.CoffeeMintClient.handlers.OnOAuthenticationSuccess;
 
 @Configuration()
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 //	private final String password = "$2a$10$QF/YQ9BzZoPmi5of5kkNeOP0bre/XmlsxyMX61aEeKwBsSxsfv1/u";
+	
+	@Autowired
+	private CustomOAuth2UserService customOAuth2UserService;
+	
+	@Autowired
+	private OnOAuthenticationSuccess oauthenticationSuccess;
 
 	@Bean
 	public PasswordEncoder passwordEncoder() {
@@ -76,14 +84,17 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				.antMatchers("/delete_product").hasAnyAuthority("product_manager")
 				.antMatchers("/update_order_status").hasAnyAuthority("saler", "shipper")
 				.anyRequest().authenticated()
+				//Oauth2
 				.and().oauth2Login().loginPage("/login").permitAll()
-				.and().formLogin()
-				.loginPage("/login").permitAll()
-				.usernameParameter("username")
-				.passwordParameter("password")
-				.loginProcessingUrl("/dologin")
-				.failureHandler(new OnAuthenticationFailureHandler())
-				.successHandler(new OnAuthenticationSuccessHandler())
+				.userInfoEndpoint().userService(customOAuth2UserService)
+				.and().successHandler(oauthenticationSuccess)
+//				.and().formLogin()
+//				.loginPage("/login").permitAll()
+//				.usernameParameter("username")
+//				.passwordParameter("password")
+//				.loginProcessingUrl("/dologin")
+//				.failureHandler(new OnAuthenticationFailureHandler())
+//				.successHandler(new OnAuthenticationSuccessHandler())
 				.and().logout().permitAll()
 				.and().exceptionHandling().accessDeniedPage("/403");
 	}

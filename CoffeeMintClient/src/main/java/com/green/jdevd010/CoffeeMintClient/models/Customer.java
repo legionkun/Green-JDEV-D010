@@ -1,11 +1,17 @@
 package com.green.jdevd010.CoffeeMintClient.models;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
+import com.green.jdevd010.CoffeeMintClient.appenum.AuthProvider;
 
 @Entity
 @Table(name = "Customers")
@@ -31,7 +37,14 @@ public class Customer {
 	private Boolean enabled;
 	
 	@Column(name = "auth_provider")
-	private String authProvider;
+	@Enumerated(EnumType.STRING)
+	private AuthProvider authProvider;
+	
+	@Column(name = "last_login")
+	private Date lastLogin;
+	
+	@Column(name = "create_date")
+	private Date createDate;
 
 	public Integer getId() {
 		return id;
@@ -97,19 +110,27 @@ public class Customer {
 		this.enabled = enabled;
 	}
 
-	public String getAuthProvider() {
+	public AuthProvider getAuthProvider() {
 		return authProvider;
 	}
 
-	public void setAuthProvider(String authProvider) {
+	public void setAuthProvider(AuthProvider authProvider) {
 		this.authProvider = authProvider;
 	}
-	
-	
-	
-	
-	
-	
-	
-	
+
+	public Date getLastLogin() {
+		return lastLogin;
+	}
+
+	public void setLastLogin(Date lastLogin) {
+		this.lastLogin = lastLogin;
+	}
+
+	public Date getCreateDate() {
+		return createDate;
+	}
+
+	public void setCreateDate(Date createDate) {
+		this.createDate = createDate;
+	}
 }
