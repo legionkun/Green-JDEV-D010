@@ -10,7 +10,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.green.jdevd010.CoffeeMintClient.controllers.services.CustomerService;
 import com.green.jdevd010.CoffeeMintClient.controllers.services.UserService;
+import com.green.jdevd010.CoffeeMintClient.models.Customer;
 import com.green.jdevd010.CoffeeMintClient.models.User;
 
 @Controller
@@ -18,6 +20,8 @@ public class MainController {
 
 	@Autowired
 	private UserService userService;
+	
+	private CustomerService customerService;
 	
 	@GetMapping("/login")
 	public String showLoginView() {
@@ -43,5 +47,28 @@ public class MainController {
 		} else {
 			return "redirect:/login";
 		}
+	}
+	
+	@GetMapping("/login_error")
+	public String showLoginError() {
+		return "login_error";
+	}
+	
+	@PostMapping("/register")
+	public String doRegister(@ModelAttribute("customer") User fromCustomer) {
+		//save customer
+		//check email chua ton taij -> save
+		//email da ton tai -> view thong bao email da duoc su dung. yeu cau user ddang ky voi email khac.
+		
+		return "redirect:/login";
+	}
+	
+	@GetMapping("/register")
+	public String showRegisterView(Model model) {
+		Customer customer = new Customer();
+		
+		model.addAttribute("customer", customer);
+		
+		return "register";
 	}
 }

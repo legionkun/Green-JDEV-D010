@@ -12,6 +12,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import com.green.jdevd010.CoffeeMintClient.controllers.services.CustomerDetailServiceImpl;
 import com.green.jdevd010.CoffeeMintClient.controllers.services.UserDetailsServiceImpl;
 import com.green.jdevd010.CoffeeMintClient.handlers.OnAuthenticationFailureHandler;
 import com.green.jdevd010.CoffeeMintClient.handlers.OnAuthenticationSuccessHandler;
@@ -38,7 +39,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Bean
 	public UserDetailsService userDetailsService() {
 		System.out.println("userDetailsService *********");
-		return new UserDetailsServiceImpl();
+		//return new UserDetailsServiceImpl();
+		return new CustomerDetailServiceImpl();
 	}
 
 	@Bean
@@ -85,16 +87,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				.antMatchers("/update_order_status").hasAnyAuthority("saler", "shipper")
 				.anyRequest().authenticated()
 				//Oauth2
-				.and().oauth2Login().loginPage("/login").permitAll()
-				.userInfoEndpoint().userService(customOAuth2UserService)
-				.and().successHandler(oauthenticationSuccess)
-//				.and().formLogin()
-//				.loginPage("/login").permitAll()
-//				.usernameParameter("username")
-//				.passwordParameter("password")
-//				.loginProcessingUrl("/dologin")
-//				.failureHandler(new OnAuthenticationFailureHandler())
-//				.successHandler(new OnAuthenticationSuccessHandler())
+//				.and().oauth2Login().loginPage("/login").permitAll()
+//				.userInfoEndpoint().userService(customOAuth2UserService)
+//				.and().successHandler(oauthenticationSuccess)
+				.and().formLogin().loginPage("/login").permitAll()
+				.usernameParameter("email")
+				.passwordParameter("password")
+				.loginProcessingUrl("/dologin")
+				.failureHandler(new OnAuthenticationFailureHandler())
+				.successHandler(new OnAuthenticationSuccessHandler())
 				.and().logout().permitAll()
 				.and().exceptionHandling().accessDeniedPage("/403");
 	}

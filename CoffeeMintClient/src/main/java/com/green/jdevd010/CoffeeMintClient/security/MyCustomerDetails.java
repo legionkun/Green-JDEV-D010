@@ -9,42 +9,37 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import com.green.jdevd010.CoffeeMintClient.models.Customer;
-import com.green.jdevd010.CoffeeMintClient.models.Role;
-import com.green.jdevd010.CoffeeMintClient.models.User;
 
-public class MyUserDetails implements UserDetails {
+public class MyCustomerDetails implements UserDetails {
 
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -6597804472274659224L;
+	private static final long serialVersionUID = 5827210588481380163L;
+	
+	private Customer customer;
 
-	private User user;
-	
-	public MyUserDetails(User user) {
-		this.user = user;
-		
+	public MyCustomerDetails(Customer customer) {
+		super();
+		this.customer = customer;
 	}
-	
+
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		List<SimpleGrantedAuthority> authorities = new ArrayList<>();
-		
-		//authorities.add(new SimpleGrantedAuthority("EDITOR"));
-		for(Role role : user.getRoles()) {
-			authorities.add(new SimpleGrantedAuthority(role.getName()));
-		}
+
+		authorities.add(new SimpleGrantedAuthority("CUSTOMER"));
 		return authorities;
 	}
 
 	@Override
 	public String getPassword() {
-		return user.getPassword();
+		return customer.getPassword();
 	}
 
 	@Override
 	public String getUsername() {
-		return user.getUsername();
+		return customer.getEmail();
 	}
 
 	@Override
@@ -64,7 +59,6 @@ public class MyUserDetails implements UserDetails {
 
 	@Override
 	public boolean isEnabled() {
-		return user.getEnabled();
+		return customer.getEnabled();
 	}
-
 }

@@ -29,10 +29,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 			throw new UsernameNotFoundException(AppString.usernameNotFound);
 		}
 		
-//		for (Role role : user.getRoles()) {
-//			System.out.println("user: " + username + "has role: " + role.getName());
-//		}
-		
 		return new MyUserDetails(user);
 	}
 }
