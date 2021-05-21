@@ -1,6 +1,7 @@
 package com.green.jdevd010.CoffeeMintClient.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -68,6 +69,9 @@ public class MainController {
 		//2.email da ton tai -> view thong bao email da duoc su dung. yeu cau user ddang ky voi email khac.
 		//3.gui email confirm to customer
 		
+		//3a. Generate verify code
+		//3b. Attach link vao email
+		//3c. Gui email
 		EmailHelper.sendHTMLEmail(mailSender, "trungtech@gmail.com", "phuochgse140203@fpt.edu.vn", 
 				"Coffee Mint account register", "hello customer");
 		
@@ -81,5 +85,13 @@ public class MainController {
 		model.addAttribute("customer", customer);
 		
 		return "register";
+	}
+	
+	@GetMapping("/verify_customer")
+	public String verifyCustomer(@Param("code") String code) {
+		
+		//set verified = true & xoa code cu 
+		
+		return "redirect:/login";
 	}
 }
