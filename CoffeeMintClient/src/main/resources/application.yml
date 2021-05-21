@@ -3,6 +3,17 @@ server:
   servlet:
     context-path: /
 spring:
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: trungtech@gmail.com
+    password: ufmpcwaqryzjzyyc
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
   datasource:
     password: 123456
     url: jdbc:mysql://localhost:3306/coffeemintdb-jdevd010

@@ -1,6 +1,7 @@
 package com.green.jdevd010.CoffeeMintClient.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,12 +13,16 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.green.jdevd010.CoffeeMintClient.controllers.services.CustomerService;
 import com.green.jdevd010.CoffeeMintClient.controllers.services.UserService;
+import com.green.jdevd010.CoffeeMintClient.helpers.EmailHelper;
 import com.green.jdevd010.CoffeeMintClient.models.Customer;
 import com.green.jdevd010.CoffeeMintClient.models.User;
 
 @Controller
 public class MainController {
 
+	@Autowired
+	private JavaMailSender mailSender;
+	
 	@Autowired
 	private UserService userService;
 	
@@ -61,6 +66,10 @@ public class MainController {
 		//save customer
 		//1.check email chua ton taij -> encrypt password -> save 
 		//2.email da ton tai -> view thong bao email da duoc su dung. yeu cau user ddang ky voi email khac.
+		//3.gui email confirm to customer
+		
+		EmailHelper.sendHTMLEmail(mailSender, "trungtech@gmail.com", "phuochgse140203@fpt.edu.vn", 
+				"Coffee Mint account register", "hello customer");
 		
 		return "redirect:/login";
 	}
