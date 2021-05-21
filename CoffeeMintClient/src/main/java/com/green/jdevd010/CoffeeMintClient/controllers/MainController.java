@@ -55,10 +55,12 @@ public class MainController {
 	}
 	
 	@PostMapping("/register")
-	public String doRegister(@ModelAttribute("customer") User fromCustomer) {
+	public String doRegister(@ModelAttribute("customer") Customer formCustomer) {
+		System.out.println("doRegister: " + formCustomer.getEmail());
+		
 		//save customer
-		//check email chua ton taij -> save
-		//email da ton tai -> view thong bao email da duoc su dung. yeu cau user ddang ky voi email khac.
+		//1.check email chua ton taij -> encrypt password -> save 
+		//2.email da ton tai -> view thong bao email da duoc su dung. yeu cau user ddang ky voi email khac.
 		
 		return "redirect:/login";
 	}

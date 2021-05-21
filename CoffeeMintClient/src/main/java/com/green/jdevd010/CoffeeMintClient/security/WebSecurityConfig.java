@@ -79,7 +79,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests()
-				.antMatchers("/", "/login2", "/login_error", "/assets/**", "/css/**", "/fonts/**", "/images/**", "/js/**", "/vendor/**")
+				.antMatchers("/", "/register", "/login2", "/login_error", "/assets/**", "/css/**", 
+						"/fonts/**", "/images/**", "/js/**", "/vendor/**")
 				.permitAll()
 				.antMatchers("/update_product").hasAnyAuthority("product_manager")
 				.antMatchers("/new_product").hasAnyAuthority("product_manager")
@@ -87,9 +88,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				.antMatchers("/update_order_status").hasAnyAuthority("saler", "shipper")
 				.anyRequest().authenticated()
 				//Oauth2
-//				.and().oauth2Login().loginPage("/login").permitAll()
-//				.userInfoEndpoint().userService(customOAuth2UserService)
-//				.and().successHandler(oauthenticationSuccess)
+				.and().oauth2Login().loginPage("/login").permitAll()
+				.userInfoEndpoint().userService(customOAuth2UserService)
+				.and().successHandler(oauthenticationSuccess)
+				//Form login
 				.and().formLogin().loginPage("/login").permitAll()
 				.usernameParameter("email")
 				.passwordParameter("password")
