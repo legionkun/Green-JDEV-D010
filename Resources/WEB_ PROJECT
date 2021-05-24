@@ -1,0 +1,25 @@
+1. WEB ADMIN PROJECT
+    - Đăng nhập với username và password
+    - Home (gồm menu chức năng)
+    - Danh sách sản phẩm (thêm, xóa, cập nhật)
+    - Chi tiết sản phẩm (xem, thêm, xóa, cập nhật)
+    - Hiển thị danh sách sản phẩm theo keyword tìm kiếm
+    - Hiển thị danh sách sản phẩm theo category
+    - Danh sách users (thêm, xóa, cập nhật, tìm user)
+    - Danh sách đơn hàng (xem, cập nhật trạng thái, gửi email)
+    - Tìm kiếm đơn hàng
+    - Phân trang cho danh sách sản phẩm, user, đơn hàng.
+    - Cập nhật trạng thái tồn kho, giảm giá, ngừng kinh doanh.
+    - Phân quyền cho các dạng user (ADMIN, PRODUCT, SALE, SHIPPER)
+2. WEB CLIENT PROJECT
+    - Đăng nhập với email & password
+    - Đăng nhập với Facebook & Google
+    - Đăng ký cho phép customer đăng ký với email và password 
+    - Chức năng gửi email xác minh địa chỉ mail đã đăng ký
+    - Home (home page & menu chức năng)
+    - Danh sách sản phảm (xem, phân loại (category, brand, khoảng giá...) )
+    - Hiển thị chi tiết sản phẩm (giá, tình trạng, chọn màu, kích thước)
+    - Chức năng mua hàng
+    - Shopping Cart (giỏ hàng) -> Check out (lưu đơn hàng)
+    - Chức năng gửi email xác nhận đơn hàng thành công.
+    - Cusomter profile

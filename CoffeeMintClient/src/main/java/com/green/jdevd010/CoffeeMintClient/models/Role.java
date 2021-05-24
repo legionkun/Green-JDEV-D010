@@ -26,11 +26,11 @@ public class Role {
 	
 	private String name;
 	
-//	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-//	@JoinTable(name = "users_roles", 
-//		 joinColumns = @JoinColumn(name = "role_id"), 
-//		 inverseJoinColumns = @JoinColumn(name = "user_id"))
-//	private Set<User> users = new HashSet<>();
+	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@JoinTable(name = "users_roles", 
+		 joinColumns = @JoinColumn(name = "role_id"), 
+		 inverseJoinColumns = @JoinColumn(name = "user_id"))
+	private Set<User> users = new HashSet<>();
 
 	public Integer getId() {
 		return id;
