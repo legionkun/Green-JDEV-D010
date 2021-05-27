@@ -49,4 +49,8 @@ public class CustomerService {
 		
 		repositopry.save(customer);
 	}
+	
+	public void saveProfile(Customer customer) {
+		repositopry.save(customer);
+	}
 }

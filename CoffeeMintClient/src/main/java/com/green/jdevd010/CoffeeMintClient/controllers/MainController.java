@@ -27,8 +27,6 @@ public class MainController {
 	@Autowired
 	private UserService userService;
 	
-	private CustomerService customerService;
-	
 	@GetMapping("/login")
 	public String showLoginView() {
 		

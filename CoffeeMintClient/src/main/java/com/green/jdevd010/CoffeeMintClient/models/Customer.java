@@ -35,6 +35,7 @@ public class Customer {
 	
 	private String address;
 	private Boolean enabled;
+	private String photo;
 	
 	@Column(name = "auth_provider")
 	@Enumerated(EnumType.STRING)
@@ -100,6 +101,14 @@ public class Customer {
 
 	public void setAddress(String address) {
 		this.address = address;
+	}
+
+	public String getPhoto() {
+		return photo;
+	}
+
+	public void setPhoto(String photo) {
+		this.photo = photo;
 	}
 
 	public Boolean getEnabled() {
