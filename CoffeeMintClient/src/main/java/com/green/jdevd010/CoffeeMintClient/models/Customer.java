@@ -10,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import com.green.jdevd010.CoffeeMintClient.appenum.AuthProvider;
 
@@ -141,5 +142,19 @@ public class Customer {
 
 	public void setCreateDate(Date createDate) {
 		this.createDate = createDate;
+	}
+	
+	@Transient
+	public String getFullName() {
+		return this.firstName + " " + this.lastName;
+	}
+	
+	@Transient
+	public String getPhotoPath() {
+		if (id == null && this.photo == null) {
+			return null;
+		}
+		
+		return "/profile-photos/" + this.id + "/" + this.photo;
 	}
 }

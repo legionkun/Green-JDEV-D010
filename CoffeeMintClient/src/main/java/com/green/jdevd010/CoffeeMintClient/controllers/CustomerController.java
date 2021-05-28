@@ -40,11 +40,14 @@ public class CustomerController {
 		String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
 		System.out.println("saveProfile photo path: " + fileName + " for user id" + formCustomer.getId());
 		
+		//Base64 encrypt for filename
+		
 		formCustomer.setPhoto(fileName);
 		customerService.saveProfile(formCustomer);
 		
 		String uploadDir = "profile-photos/" + formCustomer.getId() ;
 		
+		System.out.println("uploadDir: " + uploadDir);
 		try {
 			FileUploadHelper.saveFile(uploadDir, fileName, multipartFile);
 		} catch (IOException e) {

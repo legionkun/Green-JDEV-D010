@@ -39,7 +39,7 @@
 					</span>
 					
 					<div>
-						<img alt="user profile" src="#" id="thumnail" width="300" height="auto">
+						<img alt="user profile" th:src="@{${customer.photoPath}}" id="thumnail" width="300" height="auto">
 					</div>
 
 					<div class="wrap-input100 validate-input m-b-23" data-validate = "Username is reauired">
@@ -79,6 +79,8 @@
 					</div>
 					
 					<input class="input100" type="text" name="id" hidden="true" th:field=*{id}>
+					<input class="input100" type="text" name="id" hidden="true" th:field=*{password}>
+					<input class="input100" type="text" name="id" hidden="true" th:field=*{enabled}>
 					<input class="input100" type="text" name="authProvider" hidden="true" th:field=*{authProvider}>
 					authProvider
 					<br>

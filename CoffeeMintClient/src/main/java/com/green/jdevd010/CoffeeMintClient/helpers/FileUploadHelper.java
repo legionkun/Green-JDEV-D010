@@ -19,7 +19,7 @@ public class FileUploadHelper {
 		System.out.println("FileUploadHelper: " + uploadPath.toString());
 		
 		if (Files.notExists(uploadPath, LinkOption.NOFOLLOW_LINKS)) {
-			Files.createDirectories(uploadPath, null);
+			Files.createDirectories(uploadPath);
 		}
 		
 		InputStream inputStream = multipartFile.getInputStream();
