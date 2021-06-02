@@ -78,6 +78,7 @@ public class MainController {
 		
 		//3a. Generate verify code
 		//3b. Attach link vao email
+		//3c. http://localhost:8080/verify_customer?code=2sD1pJJxZMbX8k58iCUySg==
 		
 		//3c. Gui email
 		//EmailHelper.sendHTMLEmail(mailSender, "trungtech@gmail.com", "phuochgse140203@fpt.edu.vn", "Coffee Mint account register", "hello customer");
