@@ -11,11 +11,13 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
+import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
 
 import com.green.jdevd010.CoffeeMintClient.controllers.services.CustomerDetailServiceImpl;
-import com.green.jdevd010.CoffeeMintClient.controllers.services.UserDetailsServiceImpl;
 import com.green.jdevd010.CoffeeMintClient.handlers.OnAuthenticationFailureHandler;
 import com.green.jdevd010.CoffeeMintClient.handlers.OnAuthenticationSuccessHandler;
+import com.green.jdevd010.CoffeeMintClient.handlers.OnLogoutSuccessHandler;
 import com.green.jdevd010.CoffeeMintClient.handlers.OnOAuthenticationSuccess;
 
 @Configuration()
@@ -29,6 +31,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	@Autowired
 	private OnOAuthenticationSuccess oauthenticationSuccess;
+	
+	@Autowired
+	private OnLogoutSuccessHandler  logoutSuccessHandler;
+	
+	@Autowired
+	private javax.sql.DataSource dataSource;
 
 	@Bean
 	public PasswordEncoder passwordEncoder() {
@@ -75,11 +83,19 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 //		
 //		return manager;
 //	}
+	
+	public PersistentTokenRepository getPersistentTokenRepository() {
+		JdbcTokenRepositoryImpl tokenRepository = new JdbcTokenRepositoryImpl();
+		
+		tokenRepository.setDataSource(dataSource);
+		
+		return tokenRepository;
+	}
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests()
-				.antMatchers("/", "/register", "/login2", "/login_error", "/assets/**", "/css/**", 
+				.antMatchers("/", "/register", "/register/check_email", "/login2", "/login_error", "/assets/**", "/css/**", 
 						"/fonts/**", "/images/**", "/js/**", "/vendor/**")
 				.permitAll()
 				.antMatchers("/update_product").hasAnyAuthority("product_manager")
@@ -99,7 +115,17 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				.failureHandler(new OnAuthenticationFailureHandler())
 				.successHandler(new OnAuthenticationSuccessHandler())
 				.and().logout().permitAll()
+				//.logoutSuccessUrl("/")
+				.logoutUrl("/dologout")
+				.logoutSuccessHandler(logoutSuccessHandler)
+				//.and().csrf().disable()
+				//.and().rememberMe().key("jdevd0101greenacademy").tokenValiditySeconds(10*60)
+				.and().rememberMe().tokenRepository(getPersistentTokenRepository())
 				.and().exceptionHandling().accessDeniedPage("/403");
+
+//Remember_me encrypt		
+//		base64(username + ":" + expirationTime + ":" +
+//		md5Hex(username + ":" + expirationTime + ":" password + ":" + key))
 	}
 
 }

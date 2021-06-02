@@ -29,4 +29,8 @@ public class FileUploadHelper {
 		
 		Files.copy(inputStream, filePath, StandardCopyOption.REPLACE_EXISTING);
 	}
+	
+	public static void deleteFile() {
+		//Xoa file cu
+	}
 }

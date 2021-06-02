@@ -27,6 +27,9 @@ public class MainController {
 	@Autowired
 	private UserService userService;
 	
+	@Autowired
+	private CustomerService customerService;
+	
 	@GetMapping("/login")
 	public String showLoginView() {
 		
@@ -62,6 +65,12 @@ public class MainController {
 	public String doRegister(@ModelAttribute("customer") Customer formCustomer) {
 		System.out.println("doRegister: " + formCustomer.getEmail());
 		
+		Customer customer = customerService.getByEmail(formCustomer.getEmail());
+		
+		if (customer != null) {
+			return "redirect:/register_failed";
+		}
+		
 		//save customer
 		//1.check email chua ton taij -> encrypt password -> save 
 		//2.email da ton tai -> view thong bao email da duoc su dung. yeu cau user ddang ky voi email khac.
@@ -69,9 +78,9 @@ public class MainController {
 		
 		//3a. Generate verify code
 		//3b. Attach link vao email
+		
 		//3c. Gui email
-		EmailHelper.sendHTMLEmail(mailSender, "trungtech@gmail.com", "phuochgse140203@fpt.edu.vn", 
-				"Coffee Mint account register", "hello customer");
+		//EmailHelper.sendHTMLEmail(mailSender, "trungtech@gmail.com", "phuochgse140203@fpt.edu.vn", "Coffee Mint account register", "hello customer");
 		
 		return "redirect:/login";
 	}

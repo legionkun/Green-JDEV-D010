@@ -85,7 +85,16 @@ https://templatemo.com/tm-558-klassy-cafe
                             <!-- <li class=""><a rel="sponsored" href="https://templatemo.com" target="_blank">External URL</a></li> -->
                             <li class="scroll-to-section"><a href="#reservation">Contact Us</a></li> 
                             <li sec:authorize="isAnonymous()" class="scroll-to-section"><a href="/login">Login</a></li>
-                            <li sec:authorize="isAuthenticated()" class="scroll-to-section"><a href="/logout">Logout</a></li>
+                            <li sec:authorize="isAuthenticated()" class="scroll-to-section">
+                            	<!-- <a th:href="@{/logout}">Logout</a> -->
+                            	<form th:action="@{/dologout}" th:method="post" name="formLogout" hidden="true">
+                            		<input type="submit" value="logout">
+                            	</form>
+                            	<a href="#" onclick="document.formLogout.submit()">Logout</a>
+                            </li>
+                            <!-- <li sec:authorize="isAuthenticated()" class="scroll-to-section">
+                            	<label sec:authentication="principal.authorities">Roles</label>
+                            </li> -->
                             <li sec:authorize="isAuthenticated()" class="scroll-to-section">
                             <a href="/profile" sec:authentication="name"></a>
                             </li> 

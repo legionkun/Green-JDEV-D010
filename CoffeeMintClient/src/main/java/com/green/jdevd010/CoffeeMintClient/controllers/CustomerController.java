@@ -1,6 +1,8 @@
 package com.green.jdevd010.CoffeeMintClient.controllers;
 
 import java.io.IOException;
+import java.util.Base64;
+import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -40,16 +42,17 @@ public class CustomerController {
 		String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
 		System.out.println("saveProfile photo path: " + fileName + " for user id" + formCustomer.getId());
 		
-		//Base64 encrypt for filename
+		//Base64 encode for filename
+		String encodeFileName = Base64.getEncoder().encodeToString(fileName.split(".")[0].getBytes()) + "." + fileName.split(".")[1];
 		
-		formCustomer.setPhoto(fileName);
+		formCustomer.setPhoto(encodeFileName);
 		customerService.saveProfile(formCustomer);
 		
 		String uploadDir = "profile-photos/" + formCustomer.getId() ;
 		
 		System.out.println("uploadDir: " + uploadDir);
 		try {
-			FileUploadHelper.saveFile(uploadDir, fileName, multipartFile);
+			FileUploadHelper.saveFile(uploadDir, encodeFileName, multipartFile);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

@@ -32,14 +32,14 @@
 	<div class="limiter">
 		<div class="container-login100" style="background-image: url('images/bg-01.jpg');">
 			<div class="wrap-login100 p-l-55 p-r-55 p-t-65 p-b-54">
-				<form th:action="@{/register}" method="post" th:object="${customer}" >
+				<form onsubmit="return checkEmailExisted(this)" th:action="@{/register}" method="post" th:object="${customer}" >
 					<span class="login100-form-title p-b-49">
 						Register
 					</span>
 
 					<div class="wrap-input100 validate-input m-b-23" data-validate = "Username is reauired">
 						<span class="label-input100">Email</span>
-						<input class="input100" type="email" name="email" placeholder="Type your email" th:field="*{email}">
+						<input class="input100" type="email" id="email" name="email" placeholder="Type your email" th:field="*{email}">
 						<span class="focus-input100" data-symbol="&#xf206;"></span>
 					</div>
 					
@@ -82,6 +82,7 @@
 		</div>
 	</div>
 	
+	<div th:replace="frag_dialogs :: modal_dialog"></div>
 
 	<div id="dropDownSelect1"></div>
 	
@@ -101,6 +102,37 @@
 	<script src="vendor/countdowntime/countdowntime.js"></script>
 <!--===============================================================================================-->
 	<script src="js/main.js"></script>
-
+	
+	<script type="text/javascript">
+	
+		function showDialog(message) {
+			$("#modalBody").text(message);
+			$("#modalDialog").modal();
+		}
+	
+		function checkEmailExisted(form) {
+			emailAdress = $("#email").val();
+			
+			csrfValue = $("input[name='_csrf']").val();
+			
+			url = "[[@{/register/check_email}]]"
+			
+			params = {email: emailAdress, _csrf: csrfValue};
+			
+			$.post(url, params, function(response) {
+				if (response == "NotExist") {
+					form.submit();
+				} else if (response == "Existed") {
+					showDialog("Email nay da duoc su dung boi nguoi dung khac!")
+				} else {
+					showDialog("Co loi xay ra!")
+				}
+			}).fail(function() {
+				showDialog("Co loi xay ra!")
+			});
+			
+			return false;
+		}
+	</script>
 </body>
 </html>
