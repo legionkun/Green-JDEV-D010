@@ -9,12 +9,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.green.jdevd010.CoffeeMintClient.controllers.services.CustomerService;
 import com.green.jdevd010.CoffeeMintClient.controllers.services.UserService;
-import com.green.jdevd010.CoffeeMintClient.helpers.EmailHelper;
 import com.green.jdevd010.CoffeeMintClient.models.Customer;
 import com.green.jdevd010.CoffeeMintClient.models.User;
 
@@ -82,6 +79,7 @@ public class MainController {
 		
 		//3c. Gui email
 		//EmailHelper.sendHTMLEmail(mailSender, "trungtech@gmail.com", "phuochgse140203@fpt.edu.vn", "Coffee Mint account register", "hello customer");
+		
 		
 		return "redirect:/login";
 	}
