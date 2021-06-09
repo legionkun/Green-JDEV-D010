@@ -865,11 +865,26 @@
                 <table id="example2" class="table table-bordered table-hover">
                   <thead>
                   <tr>
-                    <th>Order ID</th>
-                    <th>Date</th>
-                    <th>Name</th>
-                    <th>Price</th>
-                    <th>Quantity</th>
+                    <th>
+                    	<a th:href="@{'/page/' + ${currentPage} + '?sortBy=order_id&sortDirection=' + ${direction}}">Order ID</a>
+                    	<span th:if="${sortBy == 'order_id'}" th:class="${direction == 'asc' ? 'fas fa-sort-up' : 'fas fa-sort-down'}"></span>
+                    </th>
+                    <th>
+                    	<a th:href="@{'/page/' + ${currentPage} + '?sortBy=date&sortDirection=' + ${direction}}">Date</a>
+                    	<span th:if="${sortBy == 'date'}" th:class="${direction == 'asc' ? 'fas fa-sort-up' : 'fas fa-sort-down'}"></span>
+                    </th>
+                    <th>
+                    	<a th:href="@{'/page/' + ${currentPage} + '?sortBy=name&sortDirection=' + ${direction}}">Name</a>
+                    	<span th:if="${sortBy == 'name'}" th:class="${direction == 'asc' ? 'fas fa-sort-up' : 'fas fa-sort-down'}"></span>
+                    </th>
+                    <th>
+                    	<a th:href="@{'/page/' + ${currentPage} + '?sortBy=price&sortDirection=' + ${direction}}">Price</a>
+                    	<span th:if="${sortBy == 'price'}" th:class="${direction == 'asc' ? 'fas fa-sort-up' : 'fas fa-sort-down'}"></span>
+                    </th>
+                    <th>
+                    	<a th:href="@{'/page/' + ${currentPage} + '?sortBy=quantity&sortDirection=' + ${direction}}">Quantity</a>
+                    	<span th:if="${sortBy == 'quantity'}" th:class="${direction == 'asc' ? 'fas fa-sort-up' : 'fas fa-sort-down'}"></span>
+                    </th>
                     <th>Total</th>
                   </tr>
                   </thead>
@@ -882,14 +897,32 @@
                     <td>[[${oder.quantity}]]</td>
                     <td>[[${oder.quantity * oder.price}]]</td>
                   </tr>
-                  
+                  </tbody>
+                  <tfoot>
                   </tfoot>
                 </table>
                 
                 <div>
                 	<a th:if="${currentPage > 1}" th:href="@{'/page/1'}">First</a>
+                	<span th:unless="${currentPage > 1}">First</span>
+                	
+                	<a th:if="${currentPage > 1}" th:href="@{'/page/' + ${currentPage - 1}}">Previous</a>
+                	<span th:unless="${currentPage > 1}">Previous</span>
+                	
+                	<span th:each="i: ${#numbers.sequence(1, totalPages)}">
+                		<a th:if="${currentPage != i}" th:href="@{'/page/' + ${i}}">[[${i}]]</a>
+                		<span style="color: blue" th:unless="${currentPage != i}">[[${i}]]</span>
+                	</span>
+                	
+                	<a th:if="${currentPage < totalPages}" th:href="@{'/page/' + ${currentPage + 1}}">Next</a>
+                	<span th:unless="${currentPage < totalPages}">Next</span>
                 	
                 	<a th:if="${currentPage < totalPages}" th:href="@{'/page/' + ${totalPages}}">Last</a>
+                	<span th:unless="${currentPage < totalPages}">Last</span>
+                </div>
+                
+                <div>
+                	<span>Display order from [[${startCount}]] to [[${endCount}]]</span>
                 </div>
                 
               </div>
@@ -977,5 +1010,23 @@
 <!-- AdminLTE for demo purposes -->
 <script src="/admin/dist/js/demo.js"></script>
 <!-- Page specific script -->
+<!-- Page specific script -->
+<script>
+  /* $(function () {
+    $("#example1").DataTable({
+      "responsive": true, "lengthChange": false, "autoWidth": false,
+      "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+    }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+    $('#example2').DataTable({
+      "paging": false,
+      "lengthChange": false,
+      "searching": false,
+      "ordering": true,
+      "info": true,
+      "autoWidth": false,
+      "responsive": true,
+    });
+  }); */
+</script>
 </body>
 </html>
