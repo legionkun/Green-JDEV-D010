@@ -15,37 +15,45 @@ import javax.persistence.Transient;
 import com.coffeemint.models.emnumered.AuthProvider;
 
 @Entity
-@Table(name = "Customers")
+@Table(name = "customers")
 public class Customer {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
+	@Column(name = "email", nullable = false, length = 48, unique = true)
 	private String email;
+	
+	@Column(name = "password", nullable = false, length = 128)
 	private String password;
 
-	@Column(name = "first_name")
+	@Column(name = "first_name", nullable = true, length = 64)
 	private String firstName;
 
-	@Column(name = "last_name")
+	@Column(name = "last_name", nullable = true, length = 64)
 	private String lastName;
 
-	@Column(name = "phone_number")
+	@Column(name = "phone_number", nullable = true, length = 12)
 	private String phoneNumber;
 
+	@Column(name = "address", nullable = true, length = 128)
 	private String address;
+	
+	@Column(name = "enabled")
 	private Boolean enabled;
+	
+	@Column(name = "photo", nullable = true, length = 128)
 	private String photo;
 
 	@Column(name = "auth_provider")
 	@Enumerated(EnumType.STRING)
 	private AuthProvider authProvider;
 
-	@Column(name = "last_login")
+	@Column(name = "last_login", nullable = true)
 	private Date lastLogin;
 
-	@Column(name = "create_date")
+	@Column(name = "create_date", nullable = true)
 	private Date createDate;
 
 	public Integer getId() {
