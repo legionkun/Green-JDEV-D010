@@ -42,6 +42,6 @@ public class Product {
 	@Column(name = "sale_price", columnDefinition = "float default '0'")
 	private float sale_price;
 	
-	@Column(name = "enabled")
+	@Column(name = "enabled", columnDefinition = "tinyint(1) default 1")
 	private Boolean enabled;
 }

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<div th:replace="navigation/nav_fragments :: header"></div>
+
+</head>
+
+<body class="hold-transition sidebar-mini">
+	<div class="wrapper">
+
+		<div th:replace="navigation/nav_fragments :: navbar"></div>
+
+		<div th:replace="navigation/nav_fragments :: sidebar"></div>
+
+		<div class="content-wrapper">
+			<!-- Default box -->
+			<div class="card card-solid">
+				<div class="card-body pb-0">
+					<div class="row">
+						<div
+							class="col-12 col-sm-6 col-md-4 d-flex align-items-stretch flex-column"
+								th:each="cat :${listCategories} ">
+							<div class="card bg-light d-flex flex-fill">
+								<div class="card-header text-muted border-bottom-0">
+									[[${cat.name}]]
+								</div>
+								<div class="card-footer">
+									<div class="text-right">
+										</a> <a th:href="@{'/home-category/' + ${cat.id}}" class="btn btn-sm btn-primary"> <i
+											class="fas fa-user"></i> View Category
+										</a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+</body>
+</html>

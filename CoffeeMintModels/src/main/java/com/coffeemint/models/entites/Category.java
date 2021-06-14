@@ -27,7 +27,7 @@ public class Category {
 	@Column(name = "photo", nullable = true, length = 128)
 	private String photo;
 	
-	@Column(name = "enabled")
+	@Column(name = "enabled", columnDefinition = "tinyint(1) default 1")
 	private Boolean enabled;
 	
 	@OneToOne
