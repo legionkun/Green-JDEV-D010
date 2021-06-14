@@ -1,0 +1,9 @@
+id,enabled,name,photo,parent_id
+1,1,"Đồ gia dụng",NULL,NULL
+2,1,"Gia dụng nhà bếp",NULL,1
+3,1,"Thiết bị gia đình",NULL,1
+4,1,"Dụng cụ nhà bếp",NULL,1
+5,1,"Nồi cơm điện",NULL,2
+6,1,"Bếp từ",NULL,2
+7,1,"Điện thoại",NULL,NULL
+8,1,Tablet,NULL,NULL
