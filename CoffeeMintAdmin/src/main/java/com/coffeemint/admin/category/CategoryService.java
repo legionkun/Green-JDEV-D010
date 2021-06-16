@@ -1,5 +1,6 @@
 package com.coffeemint.admin.category;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,13 +19,23 @@ public class CategoryService {
 		return repository.getRootCategory();
 	}
 	
-	public Category getCategoryById(Integer id) {
+	public Category getCategoryById(Long id) {
 		return repository.getById(id);
 	}
 	
 	public List<Category> getCategoryParents(Category category) {
 		
+		List<Category> listParents = new ArrayList<Category>();
 		
-		return null;
+		Category parent = category.getParent();
+		
+		while (parent != null) {
+			listParents.add(0, parent);
+			parent = parent.getParent();
+		}
+		
+		listParents.add(category);
+
+		return listParents;
 	}
 }

@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import com.coffeemint.models.entites.Category;
 
 @Repository
-public interface CategoryRepository extends JpaRepository<Category, Integer>{
+public interface CategoryRepository extends JpaRepository<Category, Long>{
 
 	@Query("SELECT c FROM Category c WHERE c.parent = NULL")
 	public List<Category> getRootCategory();

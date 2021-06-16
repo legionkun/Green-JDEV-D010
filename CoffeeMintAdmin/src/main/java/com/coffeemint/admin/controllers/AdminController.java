@@ -40,12 +40,18 @@ public class AdminController {
 	}
 	
 	@RequestMapping(value = "/home-category/{id}", method = RequestMethod.GET)
-	public String showHomeCategoryView(@PathVariable("id") Integer id, Model model) {
+	public String showHomeCategoryView(@PathVariable("id") Long id, Model model) {
 		
 		Category category = service.getCategoryById(id);
 		
+		List<Category> listCategories = category.getListSubCategory();
+		
+		
 		List<Category> listParents = service.getCategoryParents(category);
 		
-		return "home";
+		model.addAttribute("listParents", listParents);
+		model.addAttribute("listCategories", listCategories);
+		
+		return "home_category";
 	}
 }

@@ -1,6 +1,8 @@
 package com.coffeemint.models.entites;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -12,6 +14,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name = "categories")
@@ -84,5 +87,15 @@ public class Category {
 
 	public void setSubCategories(Set<Category> subCategories) {
 		this.subCategories = subCategories;
+	}
+	
+	@Transient
+	public List<Category> getListSubCategory() {
+		List<Category> list = new ArrayList<>();
+		for (Category category :subCategories ) {
+			list.add(category);
+		}
+		
+		return list;
 	}
 }
