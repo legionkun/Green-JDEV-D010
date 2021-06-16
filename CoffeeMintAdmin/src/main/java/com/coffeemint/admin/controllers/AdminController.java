@@ -52,6 +52,7 @@ public class AdminController {
 		model.addAttribute("listParents", listParents);
 		model.addAttribute("listCategories", listCategories);
 		
+		
 		return "home_category";
 	}
 }
