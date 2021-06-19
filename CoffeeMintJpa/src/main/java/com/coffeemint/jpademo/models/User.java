@@ -73,6 +73,4 @@ public class User {
 	public void addGroup(Group group) {
 		this.groups.add(group);
 	}
-	
-	
 }

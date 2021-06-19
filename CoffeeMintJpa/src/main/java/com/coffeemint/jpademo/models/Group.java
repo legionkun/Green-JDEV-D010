@@ -1,5 +1,6 @@
 package com.coffeemint.jpademo.models;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -13,6 +14,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name = "tbgroups")
@@ -66,5 +68,16 @@ public class Group {
 
 	public void setUsers(Set<User> users) {
 		this.users = users;
+	}
+	
+	@Transient
+	public ArrayList<User> getListUser() {
+		ArrayList<User> listUser = new ArrayList<>();
+		
+		for(User user : users) {
+			listUser.add(user);
+		}
+		
+		return listUser;
 	}
 }
